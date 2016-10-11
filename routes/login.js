@@ -15,7 +15,6 @@ router.post('/', function(req, res) {
         md5 = crypto.createHash('md5');
 
     User.getUserByUserName(userName, function (err, results) {
-
         if(results == '')
         {
             res.locals.error = '用户不存在';
@@ -24,7 +23,7 @@ router.post('/', function(req, res) {
         }
 
          userPwd = md5.update(userPwd).digest('hex');
-         if(results[0].UserName != userName || results[0].UserPass != userPwd)
+         if(results[0].username != userName || results[0].userpass != userPwd)
          {
              res.locals.error = '用户名或密码有误';
              res.render('login',{title:TITLE_LOGIN});

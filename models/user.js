@@ -35,7 +35,7 @@ pool.getConnection(function(err, connection) {
             userpass: this.userpass
         };
 
-        var insertUser_Sql = "INSERT INTO userinfo(id,username,userpass) VALUES(0,?,?)";
+        var insertUser_Sql = "INSERT INTO userinfo(username,userpass) VALUES(?,?)";
 
         connection.query(insertUser_Sql, [user.username, user.userpass], function (err,result) {
             if (err) {
@@ -43,7 +43,7 @@ pool.getConnection(function(err, connection) {
                 return;
             }
 
-            connection.release();
+            //connection.release();
 
             console.log("invoked[save]");
             callback(err,result);
@@ -61,7 +61,7 @@ pool.getConnection(function(err, connection) {
                 return;
             }
 
-            connection.release();
+            //connection.release();
 
             console.log("invoked[getUserNumByName]");
             callback(err,result);
@@ -79,11 +79,11 @@ pool.getConnection(function(err, connection) {
                 return;
             }
 
-            connection.release();
+            //connection.release();
 
             console.log("invoked[getUserByUserName]");
             callback(err,result);
         });
     };
-
+    connection.release();
 });
